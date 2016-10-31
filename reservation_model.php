@@ -25,10 +25,7 @@ class Reservation
 	
 	{return $this->assurance;}
 	
-	public function save()
-	{
-	$_SESSION['reservation'] = serialize($this);
-	}
+	
 
 }
 ?>

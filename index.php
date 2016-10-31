@@ -98,7 +98,8 @@ function save_reservation ()
 				{
 					$reservation = new reservation("","",""); 
 				}
-				$reservation->save();	
+				$_SESSION['reservation'] = serialize($reservation);
+				
 				return $reservation;
 			}
 			elseif(isset ($_SESSION['reservation'])){return read_reservation(); }
