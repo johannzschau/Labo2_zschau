@@ -9,7 +9,8 @@
 <h1>Detail de la reservation</h1>
  <?php
 				
-
+$txt1 = $_SESSION['error_AL'];
+echo "<h2>$txt1</h2>";
 echo "<form method='post' action='index.php'>";
 
 for ($i= 0; $i <= $reservation->getNb_place(); ++$i)
@@ -37,9 +38,9 @@ echo'<table>
   
 } 
 ?>   
-				<td><input type="submit" value="Etape suivante" name="btn_next"></td>
-				<td><input type="submit" value="Retour" name="btn_rtn"></td>
-				<td><input type="submit" value="Annuler"></td>
+				<td><input type="submit" class="button"value="Etape suivante" name="btn_next"></td>
+				<td><input type="submit" class="button"value="Retour" name="btn_rtn"></td>
+				<td><input type="submit" class="button" value="annuler" 		name="btn_Annuler"></td>
 				
 	 
 
