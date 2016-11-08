@@ -50,7 +50,11 @@
 			include("validation_view.php");
 			$_SESSION['page']= 3;
 		}
-	break;		
+	break;
+	
+	case 3 :
+	include("confirmation_view.php");
+	break;	
 	
 }
 function control_var ($reservation)
@@ -109,7 +113,7 @@ function save_reservation ()
 {	
 	if(isset($_POST['destination']) && isset ($_POST['Nb_place']))
 	{
-		if(strlen($_POST['destination'])<=15 && intval($_POST['Nb_place'])<=15 && intval($_POST['Nb_place'])>0 )
+		if(strlen($_POST['destination'])<=15 && strlen($_POST['destination'])>2 && intval($_POST['Nb_place'])<=15 && intval($_POST['Nb_place'])>0 )
 		{
 			if (empty($_POST['assurance'])) 
 			{ 

@@ -29,7 +29,7 @@ for ($i= 0; $i <= $reservation->getNb_place(); $i++)
 ?>
 <form method='post' action='index.php'>
 <p>  
-<td><input type="submit" class="button"value="Etape suivante" name="btn_next"></td>
+<td><input type="submit" class="button"value="Confirmation" name="btn_next"></td>
 <td><input type="submit" class="button"value="Retour" name="btn_rtn"></td>
 <td><input type="submit" class="button"value="annuler" 		name="btn_Annuler"></td></p>
 </form>	
