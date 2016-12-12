@@ -50,11 +50,7 @@ echo "</table>\n";
 	
 	
 }
-$result = $mysqli->query($query) or die("Query failed");
-while ($line = $result->fetch_array(MYSQLI_ASSOC))
-{
-echo $line['Nom'].'<BR>';
-}
+
 
 // Libération des résultats
 $result->close();

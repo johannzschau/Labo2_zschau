@@ -29,7 +29,43 @@ for ($i= 0; $i <= $reservation->getNb_place(); $i++)
 	echo "<br>";
 	echo "l'age est	  : ".$person[$i]->getage();
 	echo "\n"; 
-	include("confirmation_SQL.php");
+	
+	
+$nom=$person[$i]->getnom();
+$prenom='guardian';
+$destination=$reservation->getdestination();
+$ages=$person[$i]->getage();
+
+$mysqli = new mysqli("localhost", "root", "", "reservation_1")
+or die("Could not select database");
+if ($mysqli->connect_errno) {
+echo "Echec lors de la connexion à MySQL : (" . $mysqli->connect_errno . ")
+" . $mysqli->connect_error;
+}
+else 
+{
+$query = "SELECT * FROM reservation";
+	// Insertion d'un enregistrement
+$sql= "INSERT INTO `reservation` (`Nom`, `prenom`, `destination`, `age`)
+VALUES ('$nom', '$prenom', '$destination', '$ages');";
+if ($mysqli->query($sql) === TRUE) 
+{echo"\nRecord updatedsuccessfully";
+$id_insert= $mysqli->insert_id;} 
+
+else
+{
+	echo"Error inserting record: " . $mysqli->error;
+	}
+	
+
+	
+}	
+	
+	
+	
+	
+	
+	
 	}
 
 ?>
