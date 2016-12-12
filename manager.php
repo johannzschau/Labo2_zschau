@@ -8,7 +8,22 @@ echo "Echec lors de la connexion à MySQL : (" . $mysqli->connect_errno . ")
 }
 else 
 {
+	if(isset($_POST['Submit']))
+	{ 
+$id_T=1;
+$id_T=$_POST['user_id'];
+echo '<th> supprimer </th>';
 
+$query = "SELECT * FROM reservation_2";	
+$sql = "DELETE FROM reservation_2 WHERE ID ='$id_T'";
+
+if ($mysqli->query($sql) === TRUE) {
+    echo "Record deleted successfully";
+} else {
+    echo "Error deleting record: " . $mysqli->error;
+}
+
+	}
 // Exécuter des requêtes SQL
 $query = "SELECT * FROM reservation_2";
 $result = $mysqli->query($query) or die("Query failed ");
@@ -20,7 +35,7 @@ exit;
 }
 else
 {
-	
+
 	// Affichage des entêtes de colonnes
 echo "<table>\n<tr>";
 
@@ -41,15 +56,16 @@ echo "</tr>\n";
 
 // Afficher des résultats en HTML
 while ($line = $result->fetch_assoc()) {
+	$IDS = $line["ID"];
 echo "\t<tr>\n";
 foreach ($line as $col_value) {
 
 echo "\t\t<td>$col_value</td>\n";
 }
 echo '<form method="post" action="manager.php" >
-<input type="hidden" name="user_id" value= <?php echo $id; ?> >
-<th><input type="submit" name="Submit" value="Supprimer"></th>
-<th><input type="submit" name="Submit" value="Editer"></th>
+<input type="hidden" name="user_id" value= '.$IDS.'>
+<th><input type="submit" name="Submit" value="Supprimer_'.$IDS.'"></th>
+<th><input type="submit" name="Editer" value="Editer"></th>
 
 </form>';
 echo "\t</tr>\n";
