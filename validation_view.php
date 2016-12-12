@@ -14,6 +14,11 @@ $nB_place=($nB_place+1);
 echo "la destination est : ".$reservation->getdestination();
 echo "<br>le nombre de place est de : ".$nB_place;
 echo "<br>Assurance : ".$reservation->getassurance();
+// Insertion d'un enregistrement
+
+
+
+
 for ($i= 0; $i <= $reservation->getNb_place(); $i++)
 		{
 	
@@ -23,10 +28,12 @@ for ($i= 0; $i <= $reservation->getNb_place(); $i++)
 	echo "le nom est	 : ".$person[$i]->getnom();
 	echo "<br>";
 	echo "l'age est	  : ".$person[$i]->getage();
-	echo "\n";
+	echo "\n"; 
+	include("confirmation_SQL.php");
 	}
 
 ?>
+
 <form method='post' action='index.php'>
 <p>  
 <td><input type="submit" class="button"value="Confirmation" name="btn_next"></td>
@@ -34,4 +41,5 @@ for ($i= 0; $i <= $reservation->getNb_place(); $i++)
 <td><input type="submit" class="button"value="annuler" 		name="btn_Annuler"></td></p>
 </form>	
 </body>
+
 </html>
