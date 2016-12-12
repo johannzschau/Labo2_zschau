@@ -44,6 +44,9 @@
 	break;
 	
 	case 3 :
+	$person= read_detail();
+	$reservation= read_reservation();
+		
 	include("confirmation_view.php");
 	break;	
 	

@@ -1,8 +1,8 @@
 <?php
-$nom=$person[1]->getnom();
+$nom=$person[0]->getnom();
 $prenom='guardian';
 $destination=$reservation->getdestination();
-$ages=78;
+$ages=$person[0]->getage();
 
 $mysqli = new mysqli("localhost", "root", "", "reservation_1")
 or die("Could not select database");
@@ -17,7 +17,7 @@ $query = "SELECT * FROM reservation";
 $sql= "INSERT INTO `reservation` (`Nom`, `prenom`, `destination`, `age`)
 VALUES ('$nom', '$prenom', '$destination', '$ages');";
 if ($mysqli->query($sql) === TRUE) 
-{echo"Record updatedsuccessfully";
+{echo"";//Record updatedsuccessfully
 $id_insert= $mysqli->insert_id;} 
 
 else
