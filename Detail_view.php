@@ -40,7 +40,7 @@ echo'<table>
 ?>   
 				<td><input type="submit" class="button"value="Etape suivante" name="btn_next"></td>
 				<td><input type="submit" class="button"value="Retour" name="btn_rtn"></td>
-				<td><input type="submit" class="button" value="annuler" 		name="btn_Annuler"></td>
+				<td><input type="submit" class="button" value="annuler" name="btn_Annuler"></td>
 				
 	 
 

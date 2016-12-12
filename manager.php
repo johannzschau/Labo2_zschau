@@ -10,7 +10,7 @@ else
 {
 
 // Exécuter des requêtes SQL
-$query = "SELECT * FROM reservation";
+$query = "SELECT * FROM reservation_2";
 $result = $mysqli->query($query) or die("Query failed ");
 
 
@@ -30,6 +30,8 @@ echo "<table>\n<tr>";
 
 while ($finfo = $result->fetch_field())
 { echo '<th>'. $finfo->name .'</th>'; }
+echo '<th> Supprimer </th>';
+echo '<th> Editer </th>';
 echo "</tr>\n";
 
 
@@ -44,10 +46,19 @@ foreach ($line as $col_value) {
 
 echo "\t\t<td>$col_value</td>\n";
 }
+echo '<form method="post" action="manager.php" >
+<input type="hidden" name="user_id" value= <?php echo $id; ?> >
+<th><input type="submit" name="Submit" value="Supprimer"></th>
+<th><input type="submit" name="Submit" value="Editer"></th>
+
+</form>';
 echo "\t</tr>\n";
 }
 echo "</table>\n";
 	
+
+
+
 	
 }
 

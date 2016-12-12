@@ -16,7 +16,7 @@
 
 $nB_place=$reservation->getNb_place();
 $nB_place=($nB_place+1);
-
+$insurance =$reservation->getassurance();
 // Insertion d'un enregistrement
 
 
@@ -27,7 +27,7 @@ for ($i= 0; $i <= $reservation->getNb_place(); $i++)
 	
 		
 $nom=$person[$i]->getnom();
-$prenom='guardian';
+$prenom='';
 $destination=$reservation->getdestination();
 $ages=$person[$i]->getage();
 
@@ -39,10 +39,10 @@ echo "Echec lors de la connexion à MySQL : (" . $mysqli->connect_errno . ")
 }
 else 
 {
-$query = "SELECT * FROM reservation";
-	// Insertion d'un enregistrement
-$sql= "INSERT INTO `reservation` (`Nom`, `prenom`, `destination`, `age`)
-VALUES ('$nom', '$prenom', '$destination', '$ages');";
+$query = "SELECT * FROM reservation_2";
+	// Insertion d'un enregistrement 
+$sql= "INSERT INTO `reservation_2` (`lastname`, `age`, `insurance`, `destination`,`ID`)
+VALUES ('$nom', '$ages','$insurance','$destination',NULL);";
 if ($mysqli->query($sql) === TRUE) 
 {echo"<p>
             Votre demande a bien été enregistrée.<br>
@@ -59,13 +59,7 @@ else
 
 	
 }	
-	
-	
-	
-	
-	
-	
-	}
+		}
 
 ?>		
 		
