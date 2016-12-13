@@ -1,35 +1,24 @@
 <?php
    
- session_start();
+session_start();
 
 if(!empty($_GET['admin']))
 	{ 			
 	 	$pages= 1 ;
 	}
 	
-  	else
+else
 	{
 		$pages = 0;
 	}
 		
- 
-  switch ($pages)
-{
+switch ($pages)
+	{
 			
-	case 0 :
+	case 0 :include("controleur.php");break;
+	case 1 :include("manager.php");	  break;
+	
+	}
 
-
-	include("controleur.php");
-	break;
-	case 1 :
-	include("manager.php");
-
-	break;
-}
-
- 
-
- 
- 
- 
+  
 ?>

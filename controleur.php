@@ -81,18 +81,18 @@ function save_detail ()
 	$person = array();
 	for ($i= 0; $i <= $res->getNb_place(); $i++)
 	{
-		if(isset($_POST['nom'.$i]) && isset($_POST['age'.$i]))
+		if(isset($_POST['name'.$i]) && isset($_POST['age'.$i]))
 		{
-			if(strlen($_POST['nom'.$i])<=15 and intval($_POST['age'.$i])>0 and intval($_POST['age'.$i])< 110 )
+			if(strlen($_POST['name'.$i])<=15 and intval($_POST['age'.$i])>0 and intval($_POST['age'.$i])< 110 )
 			{
-				$nom=$_POST['nom'.$i];
+				$name=$_POST['name'.$i];
 				$age=$_POST['age'.$i];
-				$person[] = new person($nom,$age); 					
+				$person[] = new person($name,$age); 					
 					
 			}
 			else 
 			{
-				$_SESSION['error_AL']= "!!!!!!! champs incorrecte !!!!!!.\n";
+				$_SESSION['error_AL']= "Veuillez remplir tous les champs correctement.\n";
 				return false;
 			}
 				
@@ -117,23 +117,23 @@ function save_reservation ()
 	{
 		if(strlen($_POST['destination'])<=15 && strlen($_POST['destination'])>2 && intval($_POST['Nb_place'])<=15 && intval($_POST['Nb_place'])>0 )
 		{
-			if (empty($_POST['assurance'])) 
+			if (empty($_POST['insurance'])) 
 			{ 
-                $assurance = 'non';
+                $insurance = 'non';
             }
 			else
 			{
-				$assurance = 'oui';
+				$insurance = 'oui';
 			}
 		$destination=$_POST['destination'];
 		$Nb_place=($_POST['Nb_place']-1);
-		$reservation = new reservation($destination,$Nb_place,$assurance); 
+		$reservation = new reservation($destination,$Nb_place,$insurance); 
 		$_SESSION['reservation'] = serialize($reservation);
 		return $reservation;
 		}
 		else 
 		{
-			$_SESSION['error_AL']= "!!!!!!! champs incorrecte !!!!!!.\n";
+			$_SESSION['error_AL']= "Veuillez remplir tous les champs correctement.\n";
 			$reservation = new reservation("","",""); 
 			$_SESSION['reservation'] = serialize($reservation);
 			return false;
@@ -143,7 +143,7 @@ function save_reservation ()
 	elseif(isset ($_SESSION['reservation'])){return read_reservation(); }
 	else 
 	{
-		$_SESSION['error_AL']= "!!!!!!! champs incorrecte !!!!!!.\n";
+		$_SESSION['error_AL']= "Veuillez remplir tous les champs correctement.\n";
 		$reservation = new reservation("","",""); 
 		$_SESSION['reservation'] = serialize($reservation);
 		return false;
@@ -177,9 +177,9 @@ function read_detail()
 	{
 		for ($i= 0; $i <= $res->getNb_place(); $i++)
 		{
-			$nom='';
+			$name='';
 			$age=0;
-			$person[] = new person($nom,$age);
+			$person[] = new person($name,$age);
 		}	
 	}
 		
@@ -222,7 +222,7 @@ function control_variables()
 		$temps=$_SESSION['page'];
 		$page = ($temps-2);
 	}
-	elseif(isset($_POST['btn_Annuler']))
+	elseif(isset($_POST['btn_cancel']))
     {
 		$page=null;
 		$_SESSION = array();

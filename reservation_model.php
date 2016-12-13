@@ -3,27 +3,30 @@ class Reservation
 {
 	private  $destination;
 	private  $Nb_place;
-	private $assurance = 0;
+	private $insurance = 0;
 	
-	public function __construct($destination,$Nb_place,$assurance)
+	public function __construct($destination,$Nb_place,$insurance)
 	
 	{
 		$this->destination = $destination;
 		$this->Nb_place = $Nb_place;
-		$this->assurance = $assurance;
+		$this->insurance = $insurance;
 	 }
 	 
 	public function getNb_place()
-	
-	{return $this->Nb_place;}
+		{
+			return $this->Nb_place;
+		}
 	
 	public function getdestination()
+		{
+			return $this->destination;
+		}
 	
-	{return $this->destination;}
-	
-	public function getassurance()
-	
-	{return $this->assurance;}
+	public function getinsurance()
+		{
+			return $this->insurance;
+		}
 	
 	
 

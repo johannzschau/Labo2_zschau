@@ -1,30 +1,32 @@
 <?php
 class person
 {
-	private  $nom;
+	private  $name;
 	private  $age;
 	
 	
-	public function __construct($nom,$age)
+	public function __construct($name,$age)
 	
 	{
-		$this->nom = $nom;
+		$this->name = $name;
 		$this->age = $age;
 		
 	 }
 	 
-	public function getnom()
-	
-	{return $this->nom;}
+	public function getname()
+		{
+			return $this->name;
+		}
 	
 	public function getage()
-	
-	{return $this->age;}
+		{
+			return $this->age;
+		}
 	
     public function save()
-	{
-	$_SESSION['person'] = serialize($this);
-	}
+		{
+			$_SESSION['person'] = serialize($this);
+		}
 	
 
 }

@@ -2,33 +2,34 @@
 <head>
 	<meta charset="utf-8" />
 	<title>Reservation : Detail</title>
-  <link rel="stylesheet" href="style.css" type="text/css">
+<link rel="stylesheet" href="style.css" type="text/css">
 
 </head>
 <body>
 <h1>Detail de la reservation</h1>
- <?php
+
+<?php
 				
 $txt1 = $_SESSION['error_AL'];
 echo "<h2>$txt1</h2>";
 echo "<form method='post' action='index.php'>";
 
 for ($i= 0; $i <= $reservation->getNb_place(); ++$i)
-{
-if(!empty($person))
-{
-$nom = $person[$i]->getnom();
-$age = $person[$i]->getage();
-}
-else
- {
-$nom = "";
-$age = "";
-}
-echo'<table>
+	{
+		if(!empty($person))
+			{
+				$name = $person[$i]->getname();
+				$age = $person[$i]->getage();
+			}
+		else
+			{
+				$name = "";
+				$age  = "";
+			}
+		echo'<table>
 			<tr>
 				<td>Nom:</td> 
-				<td><input type="text" name="nom'.$i.'" value ='.$nom.'></td>
+				<td><input type="text" name="name'.$i.'" value ='.$name.'></td>
 			</tr>
 			<tr>
 				<td>Age:</td>
@@ -36,14 +37,12 @@ echo'<table>
 			</tr>
 		</table>';
   
-} 
+	} 
 ?>   
 				<td><input type="submit" class="button"value="Etape suivante" name="btn_next"></td>
 				<td><input type="submit" class="button"value="Retour" name="btn_rtn"></td>
-				<td><input type="submit" class="button" value="annuler" name="btn_Annuler"></td>
+				<td><input type="submit" class="button" value="annuler" name="btn_cancel"></td>
 				
 	 
-
- 	
 </body>
 </html>

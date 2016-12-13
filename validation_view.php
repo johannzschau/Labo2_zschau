@@ -7,46 +7,41 @@
 </head>
 <body>
 <h1>Validation de la reservation</h1>
+
 <?php
 
 $nB_place=$reservation->getNb_place();
 $nB_place=($nB_place+1);
 echo "la destination est : ".$reservation->getdestination();
 echo "<br>le nombre de place est de : ".$nB_place;
-echo "<br>Assurance : ".$reservation->getassurance();
+echo "<br>Assurance : ".$reservation->getinsurance();
 // Insertion d'un enregistrement
 
 
 
 
 for ($i= 0; $i <= $reservation->getNb_place(); $i++)
-		{
+	{
 	
-	echo "<br>";
-	echo "<br>";
+		echo "<br>";
+		echo "<br>";
+		echo "le nom est	 : ".$person[$i]->getname();
+		echo "<br>";
+		echo "l'age est	  : ".$person[$i]->getage();
+		echo "\n"; 
 	
-	echo "le nom est	 : ".$person[$i]->getnom();
-	echo "<br>";
-	echo "l'age est	  : ".$person[$i]->getage();
-	echo "\n"; 
-	
-	
-$nom=$person[$i]->getnom();
-$prenom='guardian';
-$destination=$reservation->getdestination();
-$ages=$person[$i]->getage();
-
-
-	
-}	
+		$name=$person[$i]->getname();
+		$destination=$reservation->getdestination();
+		$ages=$person[$i]->getage();
+	}	
 
 ?>
 
 <form method='post' action='index.php'>
-<p>  
-<td><input type="submit" class="button"value="Confirmation" name="btn_next"></td>
-<td><input type="submit" class="button"value="Retour" name="btn_rtn"></td>
-<td><input type="submit" class="button"value="annuler" 		name="btn_Annuler"></td></p>
+	<p>  
+	<td><input type="submit" class="button"value="Confirmation" name="btn_next"></td>
+	<td><input type="submit" class="button"value="Retour" name="btn_rtn"></td>
+	<td><input type="submit" class="button"value="annuler" 		name="btn_cancel"></td></p>
 </form>	
 </body>
 
