@@ -9,6 +9,7 @@
 <h1>Detail de la reservation</h1>
 
 <?php
+ini_set ( 'session.auto_start' , 0 );
 
 if (!isset($_SESSION['page']))
 	{

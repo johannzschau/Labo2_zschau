@@ -1,20 +1,13 @@
 <?php
-   
- include("reservation_model.php");
- include("person_model.php");
- include("error_model.php");
- include ("manager_model.php");
-var_dump($_SESSION);
+ 
+ include_once("reservation_model.php");
+ include_once("person_model.php");
+ include_once("error_model.php");
+ include_once ("manager_model.php");
+ 
+var_dump($_SESSION);		 
  $page = control_variables();
  $_SESSION['error_AL']= "";
-
- /*if(isset($_POST['user_id']))
- {
-	$ID=$_POST['user_id'];
-	$manager = new manager($ID);
-	$_SESSION['manager'] = serialize($manager);
-	var_dump($ID);
- } */
 
  switch ($page)
 {
@@ -27,6 +20,7 @@ var_dump($_SESSION);
 		{
 			include("Reservation_view.php");
 			$_SESSION['page']= 1;
+			
 		}
 		else 
 		{

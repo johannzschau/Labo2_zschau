@@ -9,8 +9,9 @@
 <h1>Manager</h1>
 
 <?php
- include("reservation_model.php");
- include("person_model.php");
+
+ include_once("reservation_model.php");
+ include_once("person_model.php");
 
  
 
@@ -68,14 +69,19 @@ else
 			 $insurance = $line["insurance"];
 			 $destination = $line["destination"];
 			 $ID = $line["ID"];
-			 $Nb_place = 1;
+			 $Nb_place = 0;
 			 
 			 $reservation = new reservation($destination,$Nb_place,$insurance); 
-		     $_SESSION['reservation'] = serialize($reservation);
-			 $person[] = new person($lastname,$age); 
+		     $person[] = new person($lastname,$age); 
+			 $_SESSION['reservation'] = serialize($reservation);
 			 $_SESSION['person'] = serialize($person);
-			var_dump($_SESSION);
-			//header("Location: http://localhost/projet2.1AC/index.php"); /* Redirection du navigateur */
+			//  header('location:controleur.php');
+                  
+			 var_dump($_SESSION);
+			 echo 'manager';
+			 
+		
+include("controleur.php");		/* Redirection du navigateur */
 /* Assurez-vous que la suite du code ne soit pas exécutée une fois la redirection effectuée. */
 exit;
 
@@ -83,11 +89,7 @@ exit;
          		 
 			
 				 /*
-				$firstname='dadadadadada';
-				$id_T=1;
-				$id_T=$_POST['user_id'];
-				echo '<th> Editer </th>';
-				//Mise à jour d'un enregistrement
+		
 				$sql="UPDATE reservation_2 SET lastname='blalalala' WHERE ID='$id_T'"; //modif la colonne Personne dans la table personne
 				if ($mysqli->query($sql) === TRUE)
 					{
@@ -156,11 +158,8 @@ exit;
 					<th><input type="submit" name="Submit" value="Supprimer_'.$IDS.'"></th>
 					<input type="hidden" name="user_id" value= '.$IDS.'>
 					</form>';
-					echo'<form method="post" action="controleur.php" >
-					<input type="hidden" name="user_id" value= '.$IDS.'>
-					<th><input type="submit" name="Editer" value="Editer"></th>
-					</form>';
-					echo "\t</tr>\n";
+					
+					
 					}
 				echo "</table>\n";
 
