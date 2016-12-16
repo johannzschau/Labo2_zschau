@@ -10,7 +10,13 @@
 <h1>Confirmation des reservations</h1>
 		
 <?php
+if (!isset($_SESSION['page']))
+	{
+		echo "Ne pas modifier URL 1 ";
+	}
 
+
+else{
 $nB_place=$reservation->getNb_place();
 $nB_place=($nB_place+1);
 $insurance =$reservation->getinsurance();
@@ -51,9 +57,11 @@ for ($i= 0; $i <= $reservation->getNb_place(); $i++)
 			{
 				echo"Error inserting record: " . $mysqli->error;
 			}
-	}	
-}
+	}
 
+
+}
+}
 ?>		
 		
 		

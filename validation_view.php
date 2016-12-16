@@ -9,6 +9,13 @@
 <h1>Validation de la reservation</h1>
 
 <?php
+if (!isset($_SESSION['page']))
+	{
+		echo "Ne pas modifier URL 1";
+	}
+
+else
+	{
 
 $nB_place=$reservation->getNb_place();
 $nB_place=($nB_place+1);
@@ -34,15 +41,18 @@ for ($i= 0; $i <= $reservation->getNb_place(); $i++)
 		$destination=$reservation->getdestination();
 		$ages=$person[$i]->getage();
 	}	
-
+	
+	
+echo "<form method='post' action='index.php'>
+	<p>  
+	<td><input type='submit' class='button'value='Confirmation' name='btn_next'></td>
+	<td><input type='submit' class='button'value='Retour' name='btn_rtn'></td>
+	<td><input type='submit' class='button'value='annuler' 		name='btn_cancel'></td></p>
+</form>";
+	
+}
 ?>
 
-<form method='post' action='index.php'>
-	<p>  
-	<td><input type="submit" class="button"value="Confirmation" name="btn_next"></td>
-	<td><input type="submit" class="button"value="Retour" name="btn_rtn"></td>
-	<td><input type="submit" class="button"value="annuler" 		name="btn_cancel"></td></p>
-</form>	
-</body>
+
 
 </html>

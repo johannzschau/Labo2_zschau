@@ -18,6 +18,7 @@
         </p>
 
 <?php 
+
 if(!empty($reservation))
 	{
 		$destination = $reservation->getdestination();

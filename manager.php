@@ -9,6 +9,10 @@
 <h1>Manager</h1>
 
 <?php
+ include("reservation_model.php");
+ include("person_model.php");
+
+ 
 
 ///////////////////////
 //INIT mysqli		//
@@ -49,7 +53,36 @@ else
 //Modification d'un utilisateur		//
 //////////////////////////////////////
 		elseif(isset($_POST['Editer']))
-			{
+			{   		
+				$id_T=1;
+				$id_T=$_POST['user_id'];
+				echo '<th> modifier 2 </th>';
+				
+				$query = "SELECT * FROM reservation_2 WHERE ID ='$id_T'";
+				$result2 = $mysqli->query($query);
+				
+			$line = $result2->fetch_assoc();
+			
+			 $lastname = $line["lastname"];
+			 $age = $line["age"];
+			 $insurance = $line["insurance"];
+			 $destination = $line["destination"];
+			 $ID = $line["ID"];
+			 $Nb_place = 1;
+			 
+			 $reservation = new reservation($destination,$Nb_place,$insurance); 
+		     $_SESSION['reservation'] = serialize($reservation);
+			 $person[] = new person($lastname,$age); 
+			 $_SESSION['person'] = serialize($person);
+			var_dump($_SESSION);
+			//header("Location: http://localhost/projet2.1AC/index.php"); /* Redirection du navigateur */
+/* Assurez-vous que la suite du code ne soit pas exécutée une fois la redirection effectuée. */
+exit;
+
+		 
+         		 
+			
+				 /*
 				$firstname='dadadadadada';
 				$id_T=1;
 				$id_T=$_POST['user_id'];
@@ -63,7 +96,7 @@ else
 				else 
 					{
 						echo "Error uptdating:".$mysqli->error;
-					}
+					}*/
  
 			}
 	
@@ -118,14 +151,19 @@ else
 							}
 							
 					echo '<form method="post" action="manager.php" >
-					<input type="hidden" name="user_id" value= '.$IDS.'>
+					
+					<th><input type="submit" name="Editer" value="Editer"></th>
 					<th><input type="submit" name="Submit" value="Supprimer_'.$IDS.'"></th>
+					<input type="hidden" name="user_id" value= '.$IDS.'>
+					</form>';
+					echo'<form method="post" action="controleur.php" >
+					<input type="hidden" name="user_id" value= '.$IDS.'>
 					<th><input type="submit" name="Editer" value="Editer"></th>
 					</form>';
 					echo "\t</tr>\n";
 					}
 				echo "</table>\n";
-	
+
 			}
 
 // Libération des résultats

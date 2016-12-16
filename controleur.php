@@ -3,15 +3,24 @@
  include("reservation_model.php");
  include("person_model.php");
  include("error_model.php");
-
+ include ("manager_model.php");
+var_dump($_SESSION);
  $page = control_variables();
  $_SESSION['error_AL']= "";
+
+ /*if(isset($_POST['user_id']))
+ {
+	$ID=$_POST['user_id'];
+	$manager = new manager($ID);
+	$_SESSION['manager'] = serialize($manager);
+	var_dump($ID);
+ } */
 
  switch ($page)
 {
 			
 	case 1 :
-		
+	
 		$person= read_detail();
 		$reservation= save_reservation ();
 		if ($reservation==false)
@@ -46,7 +55,8 @@
 	case 3 :
 	$person= read_detail();
 	$reservation= read_reservation();
-		
+	$manager=read_manager();
+	
 	include("confirmation_view.php");
 	break;	
 	
@@ -178,7 +188,7 @@ function read_detail()
 		for ($i= 0; $i <= $res->getNb_place(); $i++)
 		{
 			$name='';
-			$age=0;
+			$age='';
 			$person[] = new person($name,$age);
 		}	
 	}
@@ -203,7 +213,21 @@ function read_error()
 		
 }
 		
+function read_manager()
+{
 	
+	if (isset($_SESSION['manager'])) 
+	{
+		return unserialize($_SESSION['manager']);
+	}	
+	else
+	{
+		$ID = 'rien trouvé :(';
+		$manager = new manager($ID); 
+		return $manager;
+	}	
+		
+}	
 		
 	
 
