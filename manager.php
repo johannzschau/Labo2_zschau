@@ -10,8 +10,7 @@
 
 <?php
 
- include_once("reservation_model.php");
- include_once("person_model.php");
+
 
  
 
@@ -54,7 +53,9 @@ else
 //Modification d'un utilisateur		//
 //////////////////////////////////////
 		elseif(isset($_POST['Editer']))
-			{   		
+			{
+ include_once("reservation_model.php");
+ include_once("person_model.php");				
 				$id_T=1;
 				$id_T=$_POST['user_id'];
 				echo '<th> modifier 2 </th>';
@@ -73,14 +74,14 @@ else
 			 
 			 $reservation = new reservation($destination,$Nb_place,$insurance); 
 		     $person[] = new person($lastname,$age); 
-			 $_SESSION['reservation'] = serialize($reservation);
-			 $_SESSION['person'] = serialize($person);
+			
 			//  header('location:controleur.php');
-                  
-			 var_dump($_SESSION);
+          	
+ $_SESSION['reservation'] = serialize($reservation);
+			 $_SESSION['person'] = serialize($person);
 			 echo 'manager';
 			 
-		
+	$page = $_SESSION['page']= 2 ;	
 include("controleur.php");		/* Redirection du navigateur */
 /* Assurez-vous que la suite du code ne soit pas exécutée une fois la redirection effectuée. */
 exit;
@@ -151,13 +152,37 @@ exit;
 
 								echo "\t\t<td>$col_value</td>\n";
 							}
-							
+					
+						
 					echo '<form method="post" action="manager.php" >
 					
 					<th><input type="submit" name="Editer" value="Editer"></th>
 					<th><input type="submit" name="Submit" value="Supprimer_'.$IDS.'"></th>
 					<input type="hidden" name="user_id" value= '.$IDS.'>
 					</form>';
+					
+						$query = "SELECT * FROM reservation_2 WHERE ID ='$IDS'";
+						$result2 = $mysqli->query($query);
+						$line = $result2->fetch_assoc();
+						
+						$lastname = $line["lastname"];
+						$age = $line["age"];
+						$insurance = $line["insurance"];
+						$destination = $line["destination"];
+						$ID = $line["ID"];
+						$Nb_place = 0;
+						
+						echo'<form method="post" action="controleur.php" >
+							 <th><input type="submit" name="Editer" value="Editer"></th>
+							 <input type="hidden" name="name" value= '.$lastname.'>
+							 <input type="hidden" name="insurance" value= '.$insurance.'>
+							 <input type="hidden" name="destination" value= '.$destination.'>
+							 <input type="hidden" name="age" value= '.$age.'>
+							 <input type="hidden" name="manager" value= '.$ID.'>
+					
+					</form>';
+					
+					
 					
 					
 					}
