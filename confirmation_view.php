@@ -16,6 +16,7 @@ if (!isset($_SESSION['page']))
 	}
 
 
+
 else{
 $nB_place=$reservation->getNb_place();
 $nB_place=($nB_place+1);
@@ -37,6 +38,22 @@ for ($i= 0; $i <= $reservation->getNb_place(); $i++)
 		echo "Echec lors de la connexion à MySQL : (" . $mysqli->connect_errno . ")" . $mysqli->connect_error;
 	}
 	
+		elseif (isset($_SESSION['manager']))
+	{
+
+		$id_T = $_SESSION['manager'];
+				$query = "SELECT * FROM reservation_2";
+				$sql="UPDATE reservation_2 SET lastname='$name',age='$ages',insurance='$insurance',destination='$destination' WHERE ID='$id_T'"; //modif la colonne Personne dans la table personne
+				
+				if ($mysqli->query($sql) === TRUE)
+					{
+						echo "uptdating ok";
+					}
+				else 
+					{
+						echo "Error uptdating:".$mysqli->error;
+					}
+	}
 	else 
 	{
 		$query = "SELECT * FROM reservation_2";

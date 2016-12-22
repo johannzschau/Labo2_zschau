@@ -1,4 +1,9 @@
-
+test
+{
+    border-width:1px;
+ border-style:dotted;
+ border-color:black;
+}
 
 body{
   font-family: Helvatica;
