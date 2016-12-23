@@ -19,13 +19,13 @@
 
 <?php 
 
-if(!empty($reservation))
+if(!empty($reservation))//If a sesion exists, the objects are rebuilt here
 	{
 		$destination = $reservation->getdestination();
 		$Nb_place = ($reservation->getNb_place()+1);
 	}
 $txt1 = $_SESSION['error_AL'];
-echo "<h2>$txt1</h2>";
+echo "<h2>$txt1</h2>";//If an error is detected, it is displayed here.
 
 ?>
 <form method="post" action="index.php">

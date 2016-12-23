@@ -2,32 +2,28 @@
 <head>
 	<meta charset="utf-8" />
 	<title>Validation</title>
-  <link rel="stylesheet" href="style.css" type="text/css">
+<link rel="stylesheet" href="style.css" type="text/css">
 
 </head>
 <body>
 <h1>Validation de la reservation</h1>
 
 <?php
-if (!isset($_SESSION['page']))
+if (!isset($_SESSION['page']))// If the "page" session does not exist. We modified URL
 	{
-		echo "Ne pas modifier URL 1";
+		echo "Ne pas modifier URL ";
 	}
 
 else
 	{
 
-$nB_place=$reservation->getNb_place();
+$nB_place=$reservation->getNb_place();//Reconstructs saved objects in session
 $nB_place=($nB_place+1);
-echo "la destination est : ".$reservation->getdestination();
+echo "la destination est : ".$reservation->getdestination();//Reconstructs saved objects in session to display them 
 echo "<br>le nombre de place est de : ".$nB_place;
-echo "<br>Assurance : ".$reservation->getinsurance();
-// Insertion d'un enregistrement
+echo "<br>Assurance : ".$reservation->getinsurance();//Reconstructs saved objects in session to display them 
 
-
-
-
-for ($i= 0; $i <= $reservation->getNb_place(); $i++)
+for ($i= 0; $i <= $reservation->getNb_place(); $i++)//"Loop for" to display all the names and ages of people
 	{
 	
 		echo "<br>";
@@ -37,9 +33,6 @@ for ($i= 0; $i <= $reservation->getNb_place(); $i++)
 		echo "l'age est	  : ".$person[$i]->getage();
 		echo "\n"; 
 	
-		$name=$person[$i]->getname();
-		$destination=$reservation->getdestination();
-		$ages=$person[$i]->getage();
 	}	
 	
 	
@@ -52,7 +45,5 @@ echo "<form method='post' action='index.php'>
 	
 }
 ?>
-
-
 
 </html>

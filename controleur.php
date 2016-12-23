@@ -2,21 +2,17 @@
  
  include_once("reservation_model.php");
  include_once("person_model.php");
- include_once("error_model.php");
- include_once ("manager_model.php");
- 
-var_dump($_SESSION);		 
- $page = control_variables();
+		 
+ $page = control_variables();// Determine which buttons were pressed
  $_SESSION['error_AL']= "";
-
  switch ($page)
 {
 			
 	case 1 :
 	
-		$person= read_detail();
-		$reservation= save_reservation ();
-		if ($reservation==false)
+		$person= read_detail(); // Checks if a "detail" session exists
+		$reservation= save_reservation (); // Save the data in the template
+		if ($reservation==false) // If there is an error in the data we stay on the same page
 		{
 			include("Reservation_view.php");
 			$_SESSION['page']= 1;
@@ -31,10 +27,10 @@ var_dump($_SESSION);
 	break;
 		
 	case 2 :
-		$reservation= read_reservation();
+		$reservation= read_reservation();// Checks if a "reservation" session exists
 		$person = save_detail ();
 			
-		if (!$person)
+		if (!$person) // If there is an error in the data we stay on the same page
 		{
 			include("Detail_view.php");
 			$_SESSION['page']= 2 ;
@@ -47,15 +43,14 @@ var_dump($_SESSION);
 	break;
 	
 	case 3 :
-	$person= read_detail();
+	$person= read_detail();// Checks if a "detail" session exists
 	$reservation= read_reservation();
-	$manager=read_manager();
+	
 	
 	include("confirmation_view.php");
 	break;	
 	
 	default:
-
 		$reservation= read_reservation();
 		include("Reservation_view.php");
 		$_SESSION['page']=1;
@@ -76,9 +71,6 @@ function control_var ($reservation)
 	}
 		   
 }
-
-
-
 function save_detail ()
 {
 	$res = read_reservation();
@@ -87,7 +79,7 @@ function save_detail ()
 	{
 		if(isset($_POST['name'.$i]) && isset($_POST['age'.$i]))
 		{
-			if(strlen($_POST['name'.$i])<=15 and intval($_POST['age'.$i])>0 and intval($_POST['age'.$i])< 110 )
+			if(strlen($_POST['name'.$i])<=15 and intval($_POST['age'.$i])>0 and intval($_POST['age'.$i])< 110 )// Checks whether the encoded data is valid
 			{
 				$name=$_POST['name'.$i];
 				$age=$_POST['age'.$i];
@@ -114,7 +106,6 @@ function save_detail ()
 	$_SESSION['person'] = serialize($person);	
 	return  $person;
 }
-
 function save_reservation ()
 {	
 	if(isset($_POST['destination']) && isset ($_POST['Nb_place']))
@@ -154,7 +145,6 @@ function save_reservation ()
 	}
 }
 	
-
 function read_reservation()
 {
 	if (isset($_SESSION['reservation']))
@@ -166,7 +156,6 @@ function read_reservation()
 		return new Reservation('','',1);
 	}
 }
-
 function read_detail()
 {
 	if (isset($_SESSION['person'])) 
@@ -191,7 +180,6 @@ function read_detail()
 		
 	}
 }
-
 function read_error()
 {
 	if (isset($_SESSION['error'])) 
@@ -207,32 +195,15 @@ function read_error()
 		
 }
 		
-function read_manager()
-{
-	
-	if (isset($_SESSION['manager'])) 
-	{
-		return unserialize($_SESSION['manager']);
-	}	
-	else
-	{
-		$ID = 'rien trouvé :(';
-		$manager = new manager($ID); 
-		return $manager;
-	}	
-		
-}	
+
 		
 	
-
-
 function control_variables()
 {  
 	if(isset($_POST['btn_next']))
 	{ 			
 	 	$page=$_SESSION['page'];
 	}
-
 		
 	
    elseif(isset($_POST['btn_rtn']))
@@ -253,6 +224,4 @@ function control_variables()
 	}
 		return $page;
 }
-
-
 ?>

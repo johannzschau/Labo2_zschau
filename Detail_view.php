@@ -9,22 +9,21 @@
 <h1>Detail de la reservation</h1>
 
 <?php
-ini_set ( 'session.auto_start' , 0 );
 
-if (!isset($_SESSION['page']))
+if (!isset($_SESSION['page'])) // If the "page" session does not exist. We modified URL
 	{
 		echo "Ne pas modifier URL 1";
 	}
 else
 	{
 		
-$txt1 = $_SESSION['error_AL'];
+$txt1 = $_SESSION['error_AL'];//If an error is detected, it is displayed here.
 echo "<h2>$txt1</h2>";
 echo "<form method='post' action='index.php'>";
 
 for ($i= 0; $i <= $reservation->getNb_place(); ++$i)
 	{
-		if(!empty($person[$i]))
+		if(!empty($person[$i]))//If a sesion exists, the objects are rebuilt here
 			{
 				$name = $person[$i]->getname();
 				$age = $person[$i]->getage();
@@ -48,13 +47,9 @@ for ($i= 0; $i <= $reservation->getNb_place(); ++$i)
 		echo '  <td><input type="submit" class="button"value="Etape suivante" name="btn_next"></td>
 				<td><input type="submit" class="button"value="Retour" name="btn_rtn"></td>
 				<td><input type="submit" class="button" value="annuler" name="btn_cancel"></td>';
-  
-	 
-	}
+ 	}
 ?>   
-				
- 
+
 </form>				
-	 
 </body>
 </html>
