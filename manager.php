@@ -38,6 +38,7 @@ else
 				echo '<th> supprimer </th>';
 
 				$query = "SELECT * FROM reservation_2";	
+				// sql to delete a record
 				$sql = "DELETE FROM reservation_2 WHERE ID ='$id_T'";
 
 				if ($mysqli->query($sql) === TRUE) 
@@ -50,59 +51,35 @@ else
 					}
 			}
 ///////////////////////////////////////
-//Modification d'un utilisateur		//
+//Editing a User					//
 //////////////////////////////////////
-		elseif(isset($_POST['Editer']))
+		 elseif(isset($_POST['Editer']))
 			{
- include_once("reservation_model.php");
- include_once("person_model.php");				
+				include_once("reservation_model.php");
+				include_once("person_model.php");
+				
 				$id_T=1;
-				$id_T=$_POST['user_id'];
+				$id_T=$_POST['user_id']; // Retrieve ID
+				
 				echo '<th> modifier 2 </th>';
-				
-				$query = "SELECT * FROM reservation_2 WHERE ID ='$id_T'";
+				// Try and connect to the database
+				$query = "SELECT * FROM reservation_2 WHERE ID ='$id_T'"; //MySqli Select Query
 				$result2 = $mysqli->query($query);
+				$line = $result2->fetch_assoc();
 				
-			$line = $result2->fetch_assoc();
-			
-			 $lastname = $line["lastname"];
-			 $age = $line["age"];
-			 $insurance = $line["insurance"];
-			 $destination = $line["destination"];
-			 $ID = $line["ID"];
-			 $Nb_place = 0;
-			 
-			 
-			 $reservation = new reservation($destination,$Nb_place,$insurance); 
-		     $person[] = new person($lastname,$age); 
-			
-			//  header('location:controleur.php');
-  session_start();
- $_SESSION['manager']=$ID; 
- $_SESSION['reservation'] = serialize($reservation);
-			 $_SESSION['person'] = serialize($person);
-			 echo 'manager';
-			 
-header("Location:index.php"); 
-exit;     /* Redirection du navigateur */		/* Redirection du navigateur */
-/* Assurez-vous que la suite du code ne soit pas exécutée une fois la redirection effectuée. */
+				$ID = $line["ID"];
+				$Nb_place = 0;
+				$reservation = new reservation($line["destination"],$Nb_place,$line["insurance"]);//Open a new connection to the MySQL server 
+				$person[] = new person($line["lastname"],$line["age"]); //Open a new connection to the MySQL server
+				
+				session_start();// Activate the session a second time so as not to lose the session data
+				
+				$_SESSION['manager']=$ID; // Use for the page "confirmation.php" to determine that it is the manager who makes the update
+				$_SESSION['reservation'] = serialize($reservation);
+				$_SESSION['person'] = serialize($person);
+				header("Location:index.php"); 
+				exit;     /* Redirection du navigateur */		/* Redirection du navigateur */
 
-
-		 
-         		 
-			
-				 /*
-		
-				$sql="UPDATE reservation_2 SET lastname='blalalala' WHERE ID='$id_T'"; //modif la colonne Personne dans la table personne
-				if ($mysqli->query($sql) === TRUE)
-					{
-						echo "uptdating ok";
-					}
-				else 
-					{
-						echo "Error uptdating:".$mysqli->error;
-					}*/
- 
 			}
 	
 //////////////////////
@@ -110,7 +87,7 @@ exit;     /* Redirection du navigateur */		/* Redirection du navigateur */
 //////////////////////
 	
 
-		// Exécuter des requêtes SQL
+		// Execute SQL queries
 		$query = "SELECT * FROM reservation_2";
 		$result = $mysqli->query($query) or die("Query failed ");
 
@@ -121,7 +98,7 @@ exit;     /* Redirection du navigateur */		/* Redirection du navigateur */
 			}
 		else
 			{
-				// Affichage des entêtes de colonnes
+				// Displaying column headers
 				echo "<table>\n<tr>";
 
 //////////////////////
@@ -144,7 +121,7 @@ exit;     /* Redirection du navigateur */		/* Redirection du navigateur */
 //////////////////////
 
 
-				// Afficher des résultats en HTML
+				// Show results
 				while ($line = $result->fetch_assoc()) 
 					{
 						$IDS = $line["ID"];
@@ -173,9 +150,9 @@ exit;     /* Redirection du navigateur */		/* Redirection du navigateur */
 
 			}
 
-// Libération des résultats
+// Release of results
 $result->close();
-// Fermeture de la connexion
+// Closing the connection
 $mysqli->close();
 
 }

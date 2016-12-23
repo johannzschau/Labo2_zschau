@@ -10,7 +10,7 @@
 <h1>Confirmation des reservations</h1>
 		
 <?php
-if (!isset($_SESSION['page']))
+if (!isset($_SESSION['page']))// If the "page" session does not exist. We modified URL
 	{
 		echo "Ne pas modifier URL 1 ";
 	}
@@ -18,31 +18,37 @@ if (!isset($_SESSION['page']))
 
 
 else{
-$nB_place=$reservation->getNb_place();
+$nB_place=$reservation->getNb_place();//Reconstructs saved objects in session
 $nB_place=($nB_place+1);
-$insurance =$reservation->getinsurance();
+$insurance =$reservation->getinsurance();//Reconstructs saved objects in session
 
 for ($i= 0; $i <= $reservation->getNb_place(); $i++)
 	{
 	
 		
-	$name=$person[$i]->getname();
+	$name=$person[$i]->getname();//Reconstructs saved objects in session
 	$firstname='';
-	$destination=$reservation->getdestination();
-	$ages=$person[$i]->getage();
+	$destination=$reservation->getdestination();//Reconstructs saved objects in session
+	$ages=$person[$i]->getage();//Reconstructs saved objects in session
 	
-	$mysqli = new mysqli("localhost", "root", "", "reservation_1")
+	$mysqli = new mysqli("localhost", "root", "", "reservation_1")//Open a new connection to the MySQL server
 	or die("Could not select database");
+	
+	/*Checking the connection*/
+
 	if ($mysqli->connect_errno) 
 	{
 		echo "Echec lors de la connexion à MySQL : (" . $mysqli->connect_errno . ")" . $mysqli->connect_error;
 	}
 	
+	/* Update of the database by the manager */
+	
 		elseif (isset($_SESSION['manager']))
 	{
+		
 
-		$id_T = $_SESSION['manager'];
-				$query = "SELECT * FROM reservation_2";
+		$id_T = $_SESSION['manager']; // ID of reservation
+				$query = "SELECT * FROM reservation_2"; //MySqli Select Query
 				$sql="UPDATE reservation_2 SET lastname='$name',age='$ages',insurance='$insurance',destination='$destination' WHERE ID='$id_T'"; //modif la colonne Personne dans la table personne
 				
 				if ($mysqli->query($sql) === TRUE)
@@ -56,10 +62,12 @@ for ($i= 0; $i <= $reservation->getNb_place(); $i++)
 	}
 	else 
 	{
-		$query = "SELECT * FROM reservation_2";
-		// Insertion d'un enregistrement 
-		$sql= "INSERT INTO `reservation_2` (`lastname`, `age`, `insurance`, `destination`,`ID`)
-		VALUES ('$name', '$ages','$insurance','$destination',NULL);";
+		/* Update of the database by the customer */
+		
+		$query = "SELECT * FROM reservation_2"; //MySqli Select Query
+	    // An insertion query. $result will be `true` if successful
+		$sql= "INSERT INTO `reservation_2` (`lastname`, `age`, `insurance`, `destination`,`ID`)	
+		VALUES ('$name', '$ages','$insurance','$destination',NULL);";/* Insertion d'un enregistrement$*/
 		if ($mysqli->query($sql) === TRUE) 
 			{
 				echo"<p>
@@ -69,12 +77,15 @@ for ($i= 0; $i <= $reservation->getNb_place(); $i++)
 				</p>";
 				$id_insert= $mysqli->insert_id;
 			} 
-
+		/*Output any connection error*/
 		else
 			{
 				echo"Error inserting record: " . $mysqli->error;
 			}
 	}
+
+// Closing the connection
+$mysqli->close();
 
 
 }

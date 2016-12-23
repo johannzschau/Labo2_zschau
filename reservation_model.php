@@ -28,7 +28,5 @@ class Reservation
 			return $this->insurance;
 		}
 	
-	
-
 }
 ?>

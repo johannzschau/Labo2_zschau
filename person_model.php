@@ -27,7 +27,5 @@ class person
 		{
 			$_SESSION['person'] = serialize($this);
 		}
-	
-
 }
 ?>
